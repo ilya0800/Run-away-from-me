@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class CrossActive : MonoBehaviour
 {
-    // Start is called before the first frame update
     public static bool crossActive = false;
 
     [SerializeField]
     Slot _slot;
+    [SerializeField]
+    GameObject _cross;
 
     private void Update()
     {
@@ -20,11 +21,9 @@ public class CrossActive : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.G))
         {
-
             crossActive = true;
             return crossActive;
         }
-
         return crossActive;
     }
 
@@ -33,8 +32,7 @@ public class CrossActive : MonoBehaviour
         if (crossActive)
         {
             Slot._checkSlot = true;
-            //_slot._itemImage.Remove(gameObject);
-          //  gameObject.SetActive(false);
+            _slot._item.Remove(_cross);
             Destroy(gameObject);
         }
     }

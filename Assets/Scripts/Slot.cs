@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
@@ -13,11 +14,8 @@ public class Slot : MonoBehaviour
     [SerializeField]
     GameObject _slot;
 
-    public List<GameObject> _itemImage;
-
-    
-    [SerializeField] 
-    List<GameObject> _item;
+    public List<GameObject> _itemImage; 
+    public List<GameObject> _item;
 
     [SerializeField]
     GameObject _textOccupiedItem;
@@ -34,12 +32,7 @@ public class Slot : MonoBehaviour
     [SerializeField]
     GameObject CrossImage, PotionSpeedImage, PotionVisibilityImage; 
 
-    private int _itemCount;
     public static bool _checkSlot = true;
-
-    void Start()
-    {
-    }
 
     private void Update()
     {
@@ -51,70 +44,68 @@ public class Slot : MonoBehaviour
 
     public void PickUpItem()
     {
-       
-            if (PotionSpeed.PickUpSpeed && _checkSlot)
-            {
-                _itemImage[1].SetActive(true);
-                PotionSpeed.PickUpSpeed = false;
-                Debug.Log("PotionSpeed");
-                _checkSlot = false;
+        if (_checkSlot)
+        {
+            
+                if (Potion.PickUpVisibility)
+                {
+                    PotionVisibilityImage.SetActive(true);
+                    Potion.PickUpVisibility = false;
+                    _checkSlot = false;
+                }
 
-            }
-            if (Potion.PickUpVisibility && _checkSlot)
-            {
-                _itemImage[0].SetActive(true);
-                Potion.PickUpVisibility = false;
-                Debug.Log("PotionVisibility");
-                _checkSlot = false;
-            }
-            if (Cross.CrossPickUp && _checkSlot)
-            {
-                _itemImage[2].SetActive(true);
-                Cross.CrossPickUp = false;
-                Debug.Log("Cross");
-                _checkSlot = false;
-            }
+                if (PotionSpeed.PickUpSpeed)
+                {
+                    PotionSpeedImage.SetActive(true);
+                    PotionSpeed.PickUpSpeed = false;
+                    _checkSlot = false;
+                }
 
-            //   for(int  i = 0; i < _itemCount;)
-        
+                if (Cross.CrossPickUp)
+                {
+                    CrossImage.gameObject.SetActive(true);
+                    //_itemImage[i].SetActive(true);
+                    Cross.CrossPickUp = false;
+                    _checkSlot = false;
+                }
+            
+        }
     }
 
     public void ReplaceItem()
     {
         if (!_checkSlot)
         {
-            if (!PotionSpeed.PickUpSpeed)
-            {
-                _itemImage[1].SetActive(false);
-                _item[1].SetActive(true);
-            }
-            if (!Potion.PickUpVisibility)
-            {
-                _itemImage[0].SetActive(false);
-                _item[0].SetActive(true);
-
-            }
-            if (!Cross.CrossPickUp)
-            {
-                _itemImage[2].SetActive(false);
-                _item[2].SetActive(true);     
-            }
-
             for (int i = 0; i < _itemImage.Count; i++)
             {
+                if (!PotionSpeed.PickUpSpeed)
+                {
+                    _itemImage[i].SetActive(false);
+                    _item[i].SetActive(true);
+                }
 
+                if (!Potion.PickUpVisibility)
+                {
+                    _itemImage[i].SetActive(false);
+                    _item[i].SetActive(true);
+
+                }
+                if (!Cross.CrossPickUp)
+                {
+                    _itemImage[i].SetActive(false);
+                    _item[i].SetActive(true);
+                }
             }
         }
-    }
-
+    }       
+   
     private void ItemCheck()
     {
-        //if (CrossActive.crossActive)
-        //    _item.Remove(CrossItem);
-        //if (ActivePotionSpeed.ActiveSpeed)
-        //    _item.Remove(PotionSpeedItem);
-        //if(ActivePotionVisibility.ActiveVisibility)
-        //    _item.Remove(PotionVisibilityItem);
+        for (int i = 0; i < _itemImage.Count; i++)
+        {
+            if (_itemImage[i] == null)
+                _itemImage.RemoveAt(i);
+        }
     }
-
 }
+

@@ -16,13 +16,11 @@ public partial class Potion : MonoBehaviour
     [SerializeField]
     GameObject SlotPotion;
     public static bool PickUpVisibility = false;
-    private readonly string _potionSearch = "PotionSearch";
 
     private void Update()
     {
         ActivePotion();    
     }
-
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -30,7 +28,6 @@ public partial class Potion : MonoBehaviour
         {
              PotionPickUp();
              ReplaceItemPotion();
-            
         }
     }
 
@@ -52,7 +49,6 @@ public partial class Potion : MonoBehaviour
             SlotPotion.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -65,8 +61,6 @@ public partial class Potion : MonoBehaviour
         if (ActivePotionVisibility.ActivePotion())
         {
             Debug.Log("work");
-
-
             StartCoroutine(PotionSearch());
         }
     }

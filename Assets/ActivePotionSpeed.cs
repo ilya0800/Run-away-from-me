@@ -7,14 +7,9 @@ public class ActivePotionSpeed : MonoBehaviour
 {
     [SerializeField]
     Slot _slot;
-
-
-    // Start is called before the first frame update
+    [SerializeField]
+    GameObject _potionSpeed;
     static public bool ActiveSpeed = false;
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -27,13 +22,10 @@ public class ActivePotionSpeed : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-
             ActiveSpeed = true;
             return ActiveSpeed;
-
         }
         return ActiveSpeed;
-
     }
 
     private void DeleteObj()
@@ -41,8 +33,7 @@ public class ActivePotionSpeed : MonoBehaviour
         if (ActiveSpeed)
         {
             Slot._checkSlot = true;
-          //  gameObject.SetActive(false);
-            //_slot._itemImage.Remove(gameObject);
+            _slot._item.Remove(_potionSpeed);
             Destroy(gameObject);
         }
     }

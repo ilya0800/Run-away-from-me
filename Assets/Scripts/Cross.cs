@@ -18,12 +18,6 @@ public class Cross : MonoBehaviour
     [SerializeField]
     GameObject SlotCross;
     public static bool CrossPickUp;
- 
-
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -35,7 +29,6 @@ public class Cross : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
             PotionPickUp();
             ReplaceItemPotion();
         }
@@ -45,11 +38,8 @@ public class Cross : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && Slot._checkSlot)
         {
-
             CrossPickUp = true;
-            //_slot.PickUpItem();
             gameObject.SetActive(false);
-
         }
     }
 

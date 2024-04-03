@@ -32,7 +32,6 @@ public class PotionSpeed : MonoBehaviour
         {
             gameObject.SetActive(false);
             PickUpSpeed = true;
-       //     _slot.PickUpItem();
             DisableText();
         }
     }
@@ -43,8 +42,7 @@ public class PotionSpeed : MonoBehaviour
         {
             _slot.ReplaceItem();
             SlotPotion.gameObject.SetActive(true);
-            gameObject.SetActive(false);
-            
+            gameObject.SetActive(false);         
         }
     }
     private void ActivePotion()

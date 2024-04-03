@@ -6,16 +6,11 @@ public class ActivePotionVisibility : MonoBehaviour
 {
     [SerializeField]
     Slot _slot;
+    [SerializeField]
+    GameObject _potionVisibility;
 
-
-    // Start is called before the first frame update
     static public bool ActiveVisibility = false;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         DeleteObj();
@@ -26,12 +21,10 @@ public class ActivePotionVisibility : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-
             ActiveVisibility = true;
             return ActiveVisibility;
         }
         return ActiveVisibility;
-        
     }
 
     private void DeleteObj()
@@ -39,9 +32,7 @@ public class ActivePotionVisibility : MonoBehaviour
         if (ActiveVisibility)
         {
             Slot._checkSlot = true;
-          // gameObject.SetActive(false);
-
-            //_slot._itemImage.Remove(gameObject);
+            _slot._item.Remove(_potionVisibility);
             Destroy(gameObject);
         }
     }
