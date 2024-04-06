@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class Slot : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Slot : MonoBehaviour
     [SerializeField]
     GameObject _slot;
 
-    public List<GameObject> _itemImage; 
+    public List<GameObject> _itemImage;
     public List<GameObject> _item;
 
     [SerializeField]
@@ -37,38 +38,37 @@ public class Slot : MonoBehaviour
     private void Update()
     {
         ItemCheck();
-        PickUpItem();
-        Debug.Log(_checkSlot);
-       
+        // PickUpItem();
+        //Debug.Log(_checkSlot);
+
+
     }
 
     public void PickUpItem()
     {
         if (_checkSlot)
-        {
-            
-                if (Potion.PickUpVisibility)
-                {
-                    PotionVisibilityImage.SetActive(true);
-                    Potion.PickUpVisibility = false;
-                    _checkSlot = false;
-                }
+        {        
+            if (Potion.PickUpVisibility)
+            {
+               PotionVisibilityImage.SetActive(true);
+               _checkSlot = false;
+                Potion.PickUpVisibility = false;
+            }
 
-                if (PotionSpeed.PickUpSpeed)
-                {
-                    PotionSpeedImage.SetActive(true);
-                    PotionSpeed.PickUpSpeed = false;
-                    _checkSlot = false;
-                }
+            if (PotionSpeed.PickUpSpeed)
+            {
+                PotionSpeedImage.SetActive(true);
+                _checkSlot = false;
+                PotionSpeed.PickUpSpeed = false;
 
-                if (Cross.CrossPickUp)
-                {
-                    CrossImage.gameObject.SetActive(true);
-                    //_itemImage[i].SetActive(true);
-                    Cross.CrossPickUp = false;
-                    _checkSlot = false;
-                }
-            
+            }
+
+            if (Cross.CrossPickUp)
+            {
+                CrossImage.gameObject.SetActive(true);
+                _checkSlot = false;
+                Cross.CrossPickUp = false;
+            }
         }
     }
 
@@ -76,35 +76,58 @@ public class Slot : MonoBehaviour
     {
         if (!_checkSlot)
         {
-            for (int i = 0; i < _itemImage.Count; i++)
+            if (PotionSpeedImage != null)
             {
-                if (!PotionSpeed.PickUpSpeed)
+                if (!PotionSpeed.PickUpSpeed && PotionSpeedImage.activeSelf)
                 {
-                    _itemImage[i].SetActive(false);
-                    _item[i].SetActive(true);
-                }
-
-                if (!Potion.PickUpVisibility)
-                {
-                    _itemImage[i].SetActive(false);
-                    _item[i].SetActive(true);
-
-                }
-                if (!Cross.CrossPickUp)
-                {
-                    _itemImage[i].SetActive(false);
-                    _item[i].SetActive(true);
+                    PotionSpeedImage.SetActive(false);
+                    PotionSpeedItem.gameObject.transform.position = new Vector3(_PosPlaeyer.position.x, _PosPlaeyer.position.y, _PosPlaeyer.position.z + 1);
+                    PotionSpeedItem.SetActive(true);
+                    Debug.Log("per");
                 }
             }
+
+            if (PotionVisibilityImage != null)
+            {
+                if (!Potion.PickUpVisibility && PotionVisibilityImage.activeSelf)
+                {
+
+                    PotionVisibilityImage.SetActive(false);
+                    PotionVisibilityItem.gameObject.transform.position = new Vector3(_PosPlaeyer.position.x, _PosPlaeyer.position.y, _PosPlaeyer.position.z + 1);
+                    PotionVisibilityItem.SetActive(true);
+                    Debug.Log("per2");
+                }
+            }
+
+            if (CrossImage != null)
+            {
+                if (!Cross.CrossPickUp && CrossImage.activeSelf)
+                {
+                    CrossImage.SetActive(false);
+                    CrossItem.gameObject.transform.position = new Vector3(_PosPlaeyer.position.x, _PosPlaeyer.position.y, _PosPlaeyer.position.z + 1);
+                    CrossItem.SetActive(true);
+                    Debug.Log("per3");
+                }
+            }
+         
         }
-    }       
-   
+        
+    }
+
     private void ItemCheck()
     {
         for (int i = 0; i < _itemImage.Count; i++)
         {
             if (_itemImage[i] == null)
                 _itemImage.RemoveAt(i);
+        }
+    }
+
+    private void dd()
+    {
+        for(int i = 0; i < _itemImage.Count; i++)
+        {
+          
         }
     }
 }

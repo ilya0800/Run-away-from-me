@@ -520,6 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09dca47694a0a654daaf987eaa2c675b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _potionSpeed: {fileID: 0}
 --- !u!212 &147621583
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -19293,6 +19294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09dca47694a0a654daaf987eaa2c675b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _potionSpeed: {fileID: 0}
 --- !u!81 &818049722
 AudioListener:
   m_ObjectHideFlags: 0
@@ -30033,6 +30035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slot: {fileID: 1708602293}
+  _cross: {fileID: 803294650}
 --- !u!1 &949696727
 GameObject:
   m_ObjectHideFlags: 0
@@ -30229,12 +30232,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1048635590}
   m_Layer: 0
-  m_Name: AllDarkness
+  m_Name: Darkness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1048635590
 Transform:
   m_ObjectHideFlags: 0
@@ -30243,8 +30246,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048635589}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.461796, y: 7.6008544, z: -9.3}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30254,7 +30257,7 @@ Transform:
   - {fileID: 2131017149}
   - {fileID: 5262712522089784799}
   - {fileID: 2058608887}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1727320880}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1054594679 stripped
 GameObject:
@@ -30667,6 +30670,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainPoint: {fileID: 624711761}
+  _cross: {fileID: 936991600}
+  _crossActive: {fileID: 936991604}
 --- !u!1 &1118257107
 GameObject:
   m_ObjectHideFlags: 3
@@ -30861,6 +30866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slot: {fileID: 1708602293}
+  _potionVisibility: {fileID: 3242668323195766707}
 --- !u!1 &1204204259 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5049317211740017404, guid: f68aa001848f0884d9a91d04a5d1cef6, type: 3}
@@ -37469,13 +37475,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slot: {fileID: 1708602291}
   _itemImage:
-  - {fileID: 1200847766}
-  - {fileID: 1870420145}
   - {fileID: 936991600}
+  - {fileID: 1870420145}
+  - {fileID: 1200847766}
   _item:
-  - {fileID: 3242668323195766707}
-  - {fileID: 718158052165945304}
   - {fileID: 803294650}
+  - {fileID: 718158052165945304}
+  - {fileID: 3242668323195766707}
   _textOccupiedItem: {fileID: 467037420}
   _textFreeSlot: {fileID: 154264512}
   _PosPlaeyer: {fileID: 818049716}
@@ -37523,6 +37529,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708602291}
   m_CullTransparentMesh: 1
+--- !u!1 &1727320878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1727320880}
+  - component: {fileID: 1727320879}
+  m_Layer: 0
+  m_Name: AllDarkness
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1727320879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727320878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1b383905fbc434a931fde969af44cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _potionVis: {fileID: 1200847770}
+  _darkness: {fileID: 0}
+--- !u!4 &1727320880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727320878}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.461796, y: 7.6008544, z: -9.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1048635590}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1770611892 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8183758440019976681, guid: c759bb922e42eda4eb6f7e6e4e2fbe63, type: 3}
@@ -38102,6 +38155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slot: {fileID: 1708602293}
+  _potionSpeed: {fileID: 718158052165945304}
 --- !u!1001 &1892575179
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39962,7 +40016,7 @@ SceneRoots:
   - {fileID: 1824181628}
   - {fileID: 818049716}
   - {fileID: 7820816149449748132}
-  - {fileID: 1048635590}
+  - {fileID: 1727320880}
   - {fileID: 253300938}
   - {fileID: 860350206}
   - {fileID: 305584324}

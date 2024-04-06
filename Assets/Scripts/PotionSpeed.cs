@@ -10,12 +10,7 @@ public class PotionSpeed : MonoBehaviour
     GameObject TextPickUp, TextReplace;
     [SerializeField]
     GameObject SlotPotion;
-    public static bool PickUpSpeed = false; 
-
-    private void Update()
-    {
-        ActivePotion();    
-    }
+    public static bool PickUpSpeed = false;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -30,9 +25,9 @@ public class PotionSpeed : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && Slot._checkSlot)
         {
-            gameObject.SetActive(false);
             PickUpSpeed = true;
-            DisableText();
+            _slot.PickUpItem();
+            gameObject.SetActive(false);
         }
     }
 
@@ -45,28 +40,8 @@ public class PotionSpeed : MonoBehaviour
             gameObject.SetActive(false);         
         }
     }
-    private void ActivePotion()
-    {
-        if (ActivePotionSpeed.ActivePotionSpeedKey())
-        {
-            Debug.Log("work");
-            StartCoroutine(ActiveSpeed());
-        }
-    }
-
     IEnumerator ActiveSpeed()
     {
         yield return new WaitForSeconds(3f);
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        DisableText();
-    }
-
-    private void DisableText()
-    {
-        TextPickUp.SetActive(false);
-        TextReplace.SetActive(false);
-    } 
 }

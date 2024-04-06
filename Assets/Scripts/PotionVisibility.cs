@@ -17,10 +17,6 @@ public partial class Potion : MonoBehaviour
     GameObject SlotPotion;
     public static bool PickUpVisibility = false;
 
-    private void Update()
-    {
-        ActivePotion();    
-    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -35,9 +31,12 @@ public partial class Potion : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && Slot._checkSlot)
         {
-            PickUpVisibility = true;
+            PickUpVisibility = true; 
+            _slot.PickUpItem();
+
             gameObject.SetActive(false);
             DisableText();
+            Debug.Log("pic");
         }
     }
 
@@ -55,23 +54,6 @@ public partial class Potion : MonoBehaviour
     {
         DisableText();
     }
-
-    private void ActivePotion()
-    {
-        if (ActivePotionVisibility.ActivePotion())
-        {
-            Debug.Log("work");
-            StartCoroutine(PotionSearch());
-        }
-    }
-
-   IEnumerator PotionSearch()
-   {
-        Darkness.SetActive(false);
-        yield return new WaitForSeconds(5);
-        Darkness.SetActive(true);
-        StopAllCoroutines();
-   }
 
     private void DisableText()
     {

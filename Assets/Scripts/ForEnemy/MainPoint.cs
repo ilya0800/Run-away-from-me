@@ -7,9 +7,11 @@ public class MainPoint : MonoBehaviour
 
     [SerializeField]
     Transform _mainPoint;
+    [SerializeField]
+    GameObject _cross;
+    [SerializeField]
+    CrossActive _crossActive;
 
-    private bool _OnesUse = true;
-    private bool _startCoroutine;
 
     void Update()
     {
@@ -18,7 +20,7 @@ public class MainPoint : MonoBehaviour
 
     private void MainPointActive()
     {        
-        if (CrossActive.ActiveCross())
+        if (_crossActive.ActiveCross())
             StartCoroutine(MoveToMainPoint());
     }
 
@@ -26,17 +28,17 @@ public class MainPoint : MonoBehaviour
     {
         OnDisableEnemyScripts();
         gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, _mainPoint.transform.position, 3 * Time.deltaTime);
+      
         if (gameObject.transform.position == _mainPoint.transform.position)
         {
             OnActiveEnemyScripts();
             CoffinController.CloseCoffin();
-            _OnesUse = false;
             
             yield return new WaitForSeconds(5);
             
             CoffinController.OpenCoffin();
-            _startCoroutine = false;
-            StopAllCoroutines();
+            gameObject.GetComponent<MainPoint>().enabled = false;
+            //StopAllCoroutines();
         }
     }
 

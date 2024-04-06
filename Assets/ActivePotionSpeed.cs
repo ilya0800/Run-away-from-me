@@ -18,9 +18,9 @@ public class ActivePotionSpeed : MonoBehaviour
         DeleteObj();
     }
 
-    public static bool ActivePotionSpeedKey()
+    public bool ActivePotionSpeedKey()
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H) && gameObject.activeSelf)
         {
             ActiveSpeed = true;
             return ActiveSpeed;

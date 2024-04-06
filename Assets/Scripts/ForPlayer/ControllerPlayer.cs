@@ -14,9 +14,13 @@ public class ControllerPlayer : MonoBehaviour
     private bool _trap = false;
     private bool _isSlime = false;
     private bool _onMove = false;
+    private bool _oneUseForCoroutine = true;
     Animator animator;
     public delegate void Action(ref bool OnMove);
     public  Action ActionPlayer;
+
+    [SerializeField]
+    ActivePotionSpeed _potionSpeed;
     public float PosX
     {
        set { _posX = value; }
@@ -57,6 +61,7 @@ public class ControllerPlayer : MonoBehaviour
   
    private void Update()
    {
+        PotionSpeed();
         PlayerFlip();
         ActionPlayer.Invoke(ref _onMove);
    }
@@ -86,4 +91,21 @@ public class ControllerPlayer : MonoBehaviour
         else if(Input.GetAxis("Horizontal") < 0)
             gameObject.transform.rotation = new Quaternion(0,180,0, 0);
     }   
+
+    private void PotionSpeed()
+    {
+        if (_potionSpeed.ActivePotionSpeedKey() && _oneUseForCoroutine)
+        {
+            StartCoroutine(PotionSpeedActive());
+        }
+    }
+
+    IEnumerator PotionSpeedActive()
+    {
+        _speed = 5;
+        yield return new WaitForSeconds(3);
+        _speed = 2;
+        _oneUseForCoroutine = false;
+        StopAllCoroutines();
+    }
 }

@@ -17,9 +17,9 @@ public class ActivePotionVisibility : MonoBehaviour
         Debug.Log(ActivePotion());
     }
 
-    public static bool ActivePotion()
+    public bool ActivePotion()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && gameObject.activeSelf)
         {
             ActiveVisibility = true;
             return ActiveVisibility;

@@ -17,7 +17,7 @@ public class Cross : MonoBehaviour
     GameObject _textReplace;
     [SerializeField]
     GameObject SlotCross;
-    public static bool CrossPickUp;
+    public static bool CrossPickUp = false;
 
     // Update is called once per frame
     void Update()
@@ -38,8 +38,12 @@ public class Cross : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E) && Slot._checkSlot)
         {
+
             CrossPickUp = true;
+            _slot.PickUpItem();
             gameObject.SetActive(false);
+            Debug.Log("pic");
+
         }
     }
 
@@ -47,6 +51,7 @@ public class Cross : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && !Slot._checkSlot)
         {
+
             _slot.ReplaceItem();
             SlotCross.gameObject.SetActive(true);
             gameObject.SetActive(false);
@@ -64,4 +69,6 @@ public class Cross : MonoBehaviour
     {
         gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, _boxPosition.transform.position, 1);
     }
+
+    
 }

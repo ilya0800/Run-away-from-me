@@ -17,15 +17,17 @@ public class CrossActive : MonoBehaviour
         DeleteObj();
     }
 
-    public static bool ActiveCross()
+    public bool ActiveCross()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G) && gameObject.activeSelf)
         {
             crossActive = true;
             return crossActive;
         }
         return crossActive;
     }
+
+ 
 
     private void DeleteObj()
     {
