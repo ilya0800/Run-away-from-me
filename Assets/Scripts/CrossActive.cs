@@ -6,7 +6,6 @@ using UnityEngine;
 public class CrossActive : MonoBehaviour
 {
     public static bool crossActive = false;
-
     [SerializeField]
     Slot _slot;
     [SerializeField]

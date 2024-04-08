@@ -8,7 +8,7 @@ public class Cross : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    Transform _boxPosition;
+    GameObject _box;
     [SerializeField]
     Slot _slot;
     [SerializeField]
@@ -22,7 +22,7 @@ public class Cross : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-//        MoveToBox();
+        MoveToBox();
     } 
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -67,7 +67,8 @@ public class Cross : MonoBehaviour
 
     private void MoveToBox()
     {
-        gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, _boxPosition.transform.position, 1);
+        if(_box.activeSelf)
+        gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, _box.transform.position, 1);
     }
 
     

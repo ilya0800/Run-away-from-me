@@ -624,6 +624,9 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 8
+  distanceHitUp: 3
+  distanceHitDown: 1.3
+  distanceHitRight: 1.5
 --- !u!114 &147621587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19132,7 +19135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1290539aec4b8554da66482b1b65587d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boxPosition: {fileID: 868802023}
+  _box: {fileID: 868802017}
   _slot: {fileID: 1708602293}
   _textPickUpItem: {fileID: 154264512}
   _textReplace: {fileID: 467037420}
@@ -19268,6 +19271,9 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 8
+  distanceHitUp: 3
+  distanceHitDown: 1.3
+  distanceHitRight: 1.5
 --- !u!114 &818049719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19294,7 +19300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09dca47694a0a654daaf987eaa2c675b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _potionSpeed: {fileID: 0}
+  _potionSpeed: {fileID: 1870420149}
 --- !u!81 &818049722
 AudioListener:
   m_ObjectHideFlags: 0
@@ -24498,7 +24504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &868802018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24665,7 +24671,7 @@ Transform:
   m_GameObject: {fileID: 868802017}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.78, y: -0.94, z: -0.21043992}
+  m_LocalPosition: {x: 1.89, y: -0.95, z: -0.21043992}
   m_LocalScale: {x: 1.6099, y: 1.6099, z: 1.6099}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24687,7 +24693,7 @@ FrictionJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 1.78, y: -0.94}
+  m_ConnectedAnchor: {x: 1.89, y: -0.95}
   m_MaxForce: 40.39
   m_MaxTorque: 1
 --- !u!213 &881447587
@@ -37545,7 +37551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1727320879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37559,7 +37565,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _potionVis: {fileID: 1200847770}
-  _darkness: {fileID: 0}
+  _darkness: {fileID: 1048635589}
+  _playerRay: {fileID: 818049718}
 --- !u!4 &1727320880
 Transform:
   m_ObjectHideFlags: 0

@@ -10,6 +10,9 @@ public class PlayerRay : MonoBehaviour
     RaycastHit2D [] _hitDown;
     [SerializeField]
     LayerMask mask;
+    public float distanceHitUp = 1.5f;
+    public float distanceHitDown = 1.3f;
+    public float distanceHitRight = 1.5f;
 
     void Start()
     {
@@ -25,9 +28,9 @@ public class PlayerRay : MonoBehaviour
 
     private void HitFog(RaycastHit2D[]hit2Ds, RaycastHit2D[] hitUp, RaycastHit2D[] hitDown)
     {
-        hitUp = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up, 3, mask);
-        hit2Ds = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.right, 1.5f, mask);
-        hitDown = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up * -1, 1.3f, mask);
+        hitUp = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up, distanceHitUp, mask);
+        hit2Ds = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.right, distanceHitRight, mask);
+        hitDown = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up * -1, distanceHitDown, mask);
         
         for (int i = 0; i < hit2Ds.Length; i++) {
             if (hit2Ds[i].collider != null)

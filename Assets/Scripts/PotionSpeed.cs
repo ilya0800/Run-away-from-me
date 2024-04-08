@@ -40,8 +40,4 @@ public class PotionSpeed : MonoBehaviour
             gameObject.SetActive(false);         
         }
     }
-    IEnumerator ActiveSpeed()
-    {
-        yield return new WaitForSeconds(3f);
-    }
 }

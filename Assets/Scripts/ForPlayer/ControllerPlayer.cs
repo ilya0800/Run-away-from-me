@@ -102,10 +102,13 @@ public class ControllerPlayer : MonoBehaviour
 
     IEnumerator PotionSpeedActive()
     {
-        _speed = 5;
-        yield return new WaitForSeconds(3);
-        _speed = 2;
         _oneUseForCoroutine = false;
+
+        _speed = 4;
+        yield return new WaitForSeconds(3);
+        _speed = 1f;
+        yield return new WaitForSeconds(5);
+        _speed = 2f;
         StopAllCoroutines();
     }
 }
