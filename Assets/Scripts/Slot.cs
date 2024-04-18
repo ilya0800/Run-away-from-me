@@ -38,10 +38,6 @@ public class Slot : MonoBehaviour
     private void Update()
     {
         ItemCheck();
-        // PickUpItem();
-        //Debug.Log(_checkSlot);
-
-
     }
 
     public void PickUpItem()
@@ -109,9 +105,7 @@ public class Slot : MonoBehaviour
                     Debug.Log("per3");
                 }
             }
-         
         }
-        
     }
 
     private void ItemCheck()
@@ -120,14 +114,6 @@ public class Slot : MonoBehaviour
         {
             if (_itemImage[i] == null)
                 _itemImage.RemoveAt(i);
-        }
-    }
-
-    private void dd()
-    {
-        for(int i = 0; i < _itemImage.Count; i++)
-        {
-          
         }
     }
 }

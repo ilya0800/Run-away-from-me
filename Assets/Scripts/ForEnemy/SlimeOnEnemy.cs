@@ -8,25 +8,18 @@ public class SlimeOnEnemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Slime"))
-        {
-            ControllerEnemy.Speed = 1;
-        }
+           _enemy.Speed = 1;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Slime"))
-        {
-            ControllerEnemy.Speed = 1;
-            
-        }
+            _enemy.Speed = 1;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Slime"))
-        {
-            ControllerEnemy.Speed = 2f;
-        }
+            _enemy.Speed = 2f;
     }
 }

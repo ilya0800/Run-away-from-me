@@ -6,7 +6,7 @@ using UnityEngine;
 public class Slime : MonoBehaviour
 {
     private bool _playerOnSlime;
-    AudioSource _audio;
+    private AudioSource _audio;
 
     private void Start()
     {
@@ -22,9 +22,7 @@ public class Slime : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
             PlayerOnSlime = true;
-        }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -36,9 +34,7 @@ public class Slime : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
             PlayerOnSlime = true;
-        }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -50,9 +46,7 @@ public class Slime : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
             PlayerOnSlime = true;
-        }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {

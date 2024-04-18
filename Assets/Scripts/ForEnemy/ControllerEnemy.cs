@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class ControllerEnemy : MonoBehaviour
 {
-
+    #region [SerializeField]
     [SerializeField]
     GameObject Player;
     [SerializeField] 
@@ -21,20 +21,35 @@ public class ControllerEnemy : MonoBehaviour
     AudioSource _source;
     [SerializeField]
     AudioSource _attack;
-    
+    [SerializeField]
+     Trap _trap;
+    #endregion
+    #region Public Reference
 
-    Animator _animator;
+    public float Speed 
+    { 
+        set { _speed = value;} 
+        get { return _speed;} 
+    }
 
-    static public float _distanceBetweenPlayerAndEnemy;
-    public static float Speed = 2.5f;
-    private bool _isSlime = false;
-
-    public Vector2 _positionForHit;
     public bool IsSlime
     {
         set { _isSlime = value; }
         get { return _isSlime; }
     }
+
+    public bool EnemyGoToDoor
+    {
+        set { _enemyGoToDoor = value; }
+        get { return _enemyGoToDoor; }
+    }
+    #endregion
+    private Animator _animator;
+    private float _speed = 2.5f;
+    private bool _isSlime = false;
+    private bool _enemyGoToDoor = false;
+    private Vector2 _positionForHit;
+    
 
     void Start()
     {
@@ -43,18 +58,22 @@ public class ControllerEnemy : MonoBehaviour
 
     void Update()
     {
-      MovePlayer();
-      RotationEnemy();
-      EnemyMoveToDoor();
-       
+        RotationEnemy();
+        EnemyMoveToDoor();
     }
-        
+
+    private void FixedUpdate()
+    {
+        MovePlayer();
+
+    }
+
     private void MovePlayer()
     {
-        if (DistanceBetweenEnemyAndPlayer() > 1f && DistanceBetweenEnemyAndPlayer() < 5 && !Trap.IsTrap && !TimerEnemyMoveToCoffin.StartStop)
+        if (DistanceBetweenEnemyAndPlayer() > 1f && DistanceBetweenEnemyAndPlayer() < 5 && !_trap.IsTrapped && !TimerEnemyMoveToCoffin.StartStop)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, _posForHit.transform.position, Speed * Time.deltaTime);
-            _animator.SetBool("Active", true);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, _posForHit.transform.position, _speed * Time.deltaTime);
+            _animator.SetBool("ActiveMove", true);
         }
     }
 
@@ -68,7 +87,7 @@ public class ControllerEnemy : MonoBehaviour
 
     private void RotationEnemy()
     {
-        if (gameObject.transform.position.x > Player.transform.position.x &&  DistanceBetweenEnemyAndPlayer() < 4)
+        if (gameObject.transform.position.x > Player.transform.position.x && DistanceBetweenEnemyAndPlayer() < 4)
             gameObject.transform.rotation = Quaternion.Euler(0, -180, -2);
 
         else if (gameObject.transform.position.x < Player.transform.position.x && DistanceBetweenEnemyAndPlayer() < 4)
@@ -77,8 +96,17 @@ public class ControllerEnemy : MonoBehaviour
 
     private void EnemyMoveToDoor()
     {
-        if(_distanceBetweenPlayerAndEnemy > 2)
-            gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, Player.transform.position, Speed * Time.deltaTime);
+        if (OpeningTheDoor.ActiveOpenDoor)
+            StartCoroutine(GoToDoorEnemy());    
+    }
+
+    IEnumerator GoToDoorEnemy()
+    {
+        _enemyGoToDoor = true;
+        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, Player.transform.position, _speed * Time.deltaTime);
+        yield return new WaitForSeconds(5);
+        _enemyGoToDoor = false;
+        OpeningTheDoor.ActiveOpenDoor = false;
     }
 }
 

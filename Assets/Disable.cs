@@ -26,7 +26,6 @@ public class Disable : MonoBehaviour
     IEnumerator PotionSearchActive()
     {
         _oneUse = false;
-        Debug.Log("gg");
         _darkness.SetActive(false);
         yield return new WaitForSeconds(3);
         _darkness.SetActive(true);
@@ -34,12 +33,10 @@ public class Disable : MonoBehaviour
         _playerRay.distanceHitDown = 0.5f;
         _playerRay.distanceHitUp = 0.5f;
         _playerRay.distanceHitRight = 0.5f;
-        Debug.Log("2log");
         yield return new WaitForSeconds(3);
         _playerRay.distanceHitRight = 1.5f;
         _playerRay.distanceHitUp = 1.5f;
         _playerRay.distanceHitDown = 1.3f;
-        Debug.Log("3log");
         StopAllCoroutines();
     }
 }

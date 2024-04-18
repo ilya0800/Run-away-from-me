@@ -15,12 +15,13 @@ public class ControllerPlayer : MonoBehaviour
     private bool _isSlime = false;
     private bool _onMove = false;
     private bool _oneUseForCoroutine = true;
-    Animator animator;
+    private Animator animator;
     public delegate void Action(ref bool OnMove);
     public  Action ActionPlayer;
 
     [SerializeField]
     ActivePotionSpeed _potionSpeed;
+    #region Public Reference
     public float PosX
     {
        set { _posX = value; }
@@ -50,13 +51,13 @@ public class ControllerPlayer : MonoBehaviour
         set { _isSlime = value; }
         get { return _isSlime; }
     }
+    #endregion
 
     private void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         ActionPlayer += MovePlayer;
-        
     }
   
    private void Update()

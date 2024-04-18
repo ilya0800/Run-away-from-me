@@ -12,8 +12,8 @@ public class PotionSpawn : MonoBehaviour, IRandomCoordinates
 
     public void RandomCoordinates(ref float PosX,ref float Posy)
     {
-        PosX = Random.Range(0, 10);
-        Posy = Random.Range(0, 10);
+        PosX = Random.Range(-10, 16);
+        Posy = Random.Range(12, -6.90f);
     }
 
     private void Spawn()

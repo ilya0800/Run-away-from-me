@@ -2,26 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box : MonoBehaviour
+public class Box : MonoBehaviour, IRandomCoordinates
 {
-    // Start is called before the first frame update
-    Animator animator;
+    private Animator animator;
+    private float PosX, PosY;
     void Start()
     {
         animator = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        RandomCoordinates(ref PosX, ref PosY );
+        SpawnBox();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Fire"))
-        {
             animator.SetBool("BoxOnFire", true);
-        }
+    }
+
+    public void RandomCoordinates(ref float PosX, ref float PosY)
+    {
+        PosX = Random.Range(-9, 15);
+        PosY = Random.Range(11, -5.90f);
+    }
+
+    private void SpawnBox()
+    {
+        gameObject.transform.position = new Vector3(PosX, PosY, -2);
     }
 }

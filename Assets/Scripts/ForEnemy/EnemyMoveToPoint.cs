@@ -8,28 +8,27 @@ public class EnemyMoveToPoint : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     GameObject[] Way;
-
+    [SerializeField]
+    Trap _trap;
     [SerializeField]
     Transform Player;
-
-    Animator _animator;
-
     [SerializeField] 
     OpeningTheDoor _door;
+  
 
-    
-    private float distance;
+    private Animator _animator;
     private int _randomNumber;
-    private bool _startCoroutine;
-    private bool _enemyOnMainPoint;
+    private ControllerEnemy _controllerEnemy;
+    private EnemyInSlime _enemyInSlime;
     
 
     private void Start()
     {
-       _animator = GetComponent<Animator>();       
+       _animator = GetComponent<Animator>();      
+       _controllerEnemy = GetComponent<ControllerEnemy>();
+       _enemyInSlime = GetComponent<EnemyInSlime>();
     }
 
-    // Update is called once per frame
     private void Update()
     {
         EnemyMoveToPoints();
@@ -38,21 +37,19 @@ public class EnemyMoveToPoint : MonoBehaviour
 
     private void EnemyMoveToPoints()
     {
-        if (!gameObject.GetComponent<EnemyInSlime>().InSlime && !Trap.IsTrap && transformDistancePlayer() > 5 && !TimerEnemyMoveToCoffin.StartStop && !_startCoroutine)
+        if (!_enemyInSlime.InSlime && !_trap.IsTrapped && transformDistancePlayer() > 5 && !TimerEnemyMoveToCoffin.StartStop  && !_controllerEnemy.EnemyGoToDoor)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, Way[_randomNumber].transform.position, ControllerEnemy.Speed * Time.deltaTime);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, Way[_randomNumber].transform.position, _controllerEnemy.Speed * Time.deltaTime);
 
             while (gameObject.transform.position.x == Way[_randomNumber].transform.position.x && gameObject.transform.position.y == Way[_randomNumber].transform.position.y)
                 _randomNumber = Random.Range(0, Way.Length);
-
-            _animator.SetBool("Active", true);
+            _animator.SetBool("ActiveMove", true);
         }
     }
 
     private void RotationEnemyPoint()
     {
-        float distance = transformDistancePlayer();
-        if (distance > 4)
+        if (transformDistancePlayer() > 4)
         {
             if(transform.position.x < Way[_randomNumber].transform.position.x)
             transform.rotation = Quaternion.Euler(0, 0, -2);

@@ -10,10 +10,6 @@ public partial class Potion : MonoBehaviour
     [SerializeField]
     Slot _slot;
     [SerializeField]
-    GameObject _textPickUpItem;
-    [SerializeField]
-    GameObject _textReplaceItem;
-    [SerializeField]
     GameObject SlotPotion;
     public static bool PickUpVisibility = false;
 
@@ -33,10 +29,7 @@ public partial class Potion : MonoBehaviour
         {
             PickUpVisibility = true; 
             _slot.PickUpItem();
-
             gameObject.SetActive(false);
-            DisableText();
-            Debug.Log("pic");
         }
     }
 
@@ -48,16 +41,5 @@ public partial class Potion : MonoBehaviour
             SlotPotion.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        DisableText();
-    }
-
-    private void DisableText()
-    {
-        _textReplaceItem.SetActive(false);
-        _textPickUpItem.SetActive(false);
     }
 }

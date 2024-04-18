@@ -12,10 +12,6 @@ public class Cross : MonoBehaviour
     [SerializeField]
     Slot _slot;
     [SerializeField]
-    GameObject _textPickUpItem;
-    [SerializeField]
-    GameObject _textReplace;
-    [SerializeField]
     GameObject SlotCross;
     public static bool CrossPickUp = false;
 
@@ -57,12 +53,6 @@ public class Cross : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        _textPickUpItem.SetActive(false);
-        _textReplace.SetActive(false);
     }
 
     private void MoveToBox()

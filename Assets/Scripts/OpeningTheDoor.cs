@@ -13,6 +13,7 @@ public class OpeningTheDoor : MonoBehaviour
     private bool _open = false;
     private bool _checkKey;
     public static bool CrossActive;
+    public static bool ActiveOpenDoor; 
 
     //  private bool _contactPlayer;
 
@@ -31,6 +32,7 @@ public class OpeningTheDoor : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.E) && ChekDestroyKey() && _door.ContactPlayer && !CrossActive)
         {
+            ActiveOpenDoor = true;
             if (BarLoading._timer <= 0)
             {
                 animator.SetBool("IsOpen", true);

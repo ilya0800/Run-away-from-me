@@ -6,6 +6,7 @@ using UnityEngine;
 public class SlimeSpawn : MonoBehaviour, IRandomCoordinates
 {
     [SerializeField] GameObject []_slimeObj;
+    [SerializeField] Collider2D[] _slimeCollider;
     private float _posX;
     private float _posY;
 
@@ -24,7 +25,7 @@ public class SlimeSpawn : MonoBehaviour, IRandomCoordinates
 
     public void RandomCoordinates(ref float x, ref float y)
     {
-        x = Random.Range(-12, 9);
-        y = Random.Range(-6, 9);
+        x = Random.Range(-10, 16);
+        y = Random.Range(12, -6.90f);
     }
 }

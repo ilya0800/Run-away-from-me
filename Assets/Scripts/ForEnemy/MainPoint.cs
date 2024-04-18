@@ -38,7 +38,6 @@ public class MainPoint : MonoBehaviour
             OpeningTheDoor.CrossActive = false;
             CoffinController.OpenCoffin();
             gameObject.GetComponent<MainPoint>().enabled = false;
-            //StopAllCoroutines();
         }
     }
 

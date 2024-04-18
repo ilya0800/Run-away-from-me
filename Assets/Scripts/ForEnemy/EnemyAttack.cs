@@ -23,13 +23,17 @@ public class EnemyAttack : MonoBehaviour
     {
         if (gameObject.GetComponent<ControllerEnemy>().DistanceBetweenEnemyAndPlayer() < 2f)
         {
-            gameObject.GetComponent<Animator>().SetBool("Attack", true);
+            if (HitEnemy.DeadPlayer)
+                gameObject.GetComponent<Animator>().SetBool("Attack", false);
+            if (!HitEnemy.DeadPlayer)
+                gameObject.GetComponent<Animator>().SetBool("Attack", true);
+
             if (_childAttack.activeSelf == true)
             {
                 if (!_attackSound.isPlaying)
-                    _attackSound.Play();
-                Debug.Log("attack");
+                    _attackSound.Play();  
             }
+
         }
         else if (gameObject.GetComponent<ControllerEnemy>().DistanceBetweenEnemyAndPlayer() > 2.3)
             gameObject.GetComponent<Animator>().SetBool("Attack", false);

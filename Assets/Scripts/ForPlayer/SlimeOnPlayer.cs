@@ -8,14 +8,14 @@ public class SlimeOnPlayer : MonoBehaviour
 {
     [SerializeField] ControllerPlayer _controllerPlayer;
     [SerializeField] AudioSource []_audioSource;
-    bool _onMove;
+    private bool _onMove;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Slime"))
         {
             _controllerPlayer.ActionPlayer.Invoke(ref _onMove);
-            _controllerPlayer.Speed = 0.3f;
+            _controllerPlayer.Speed = 0.5f;
             for (int i = 0; i < _audioSource.Length; i++)
             {
                 if (!_audioSource[i].isPlaying)
@@ -31,7 +31,7 @@ public class SlimeOnPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Slime"))
         {
             _controllerPlayer.ActionPlayer.Invoke(ref _onMove);
-            _controllerPlayer.Speed = 0.3f;
+            _controllerPlayer.Speed = 0.5f;
             for (int i = 0; i < _audioSource.Length; i++)
             {
                 if (!_audioSource[i].isPlaying)
