@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,17 +14,17 @@ public class PlayerRay : MonoBehaviour
     public float distanceHitUp = 1.5f;
     public float distanceHitDown = 1.3f;
     public float distanceHitRight = 1.5f;
+    private float time = 0;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         HitFog(hit, _hitUp, _hitDown);
-
+       // Debug.DrawRay(gameObject.transform.position, hit[])
+    }
+    private float Timer()
+    {
+        time += Time.deltaTime;
+        return time;
     }
 
     private void HitFog(RaycastHit2D[]hit2Ds, RaycastHit2D[] hitUp, RaycastHit2D[] hitDown)
@@ -36,6 +37,11 @@ public class PlayerRay : MonoBehaviour
             if (hit2Ds[i].collider != null)
             {
                 hit2Ds[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", true);
+                Timer();
+                if (Timer() > 5)
+                {
+                    hit2Ds[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", false);
+                }
             }
         }
 
@@ -44,13 +50,24 @@ public class PlayerRay : MonoBehaviour
             if (hitUp[j].collider != null)
             {
                 hitUp[j].collider.gameObject.GetComponent<Animator>().SetBool("Active", true);
+                if (Timer() > 5)
+                {
+                    hit2Ds[j].collider.gameObject.GetComponent<Animator>().SetBool("Active", false);
+                }
             }
         }
 
         for(int i = 0; i < hitDown.Length; i++)
         {
             if (hitDown[i].collider != null)
+            {
                 hitDown[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", true);
+                if (Timer() > 5)
+                {
+                    hit2Ds[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", false);
+                }
+
+            }
         }
     }
 }

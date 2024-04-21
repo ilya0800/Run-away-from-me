@@ -21,15 +21,13 @@ public class Darkness : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
             animator.SetBool("Active", true);
-        }
     }
 
 
     IEnumerator VisibleDarknessFalse()
     {
-        if (animator.GetBool("Active") == true)
+        if (animator.GetBool("Active"))
         {
             yield return new WaitForSeconds(10);
             animator.SetBool("Active", false);

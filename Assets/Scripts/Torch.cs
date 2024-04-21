@@ -11,9 +11,13 @@ public class Torch : MonoBehaviour
     GameObject[] PointSpawn;
     [SerializeField]
     LayerMask LayerMask;
-    
  
-    private bool _isPlayer = true;
+    private bool _playerPickUpTorch = false;
+    public bool PlayerPickUpTorch
+    {
+        set { _playerPickUpTorch = value; }
+        get { return _playerPickUpTorch; }      
+    }
     private bool _activeTorch = true;
     private int _randomNumber; 
     Collider2D []Collider;
@@ -24,10 +28,6 @@ public class Torch : MonoBehaviour
         StartSpawnTorch(ref _randomNumber);
     }
 
-    private void Update()
-    {
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Fog"))        
@@ -35,10 +35,6 @@ public class Torch : MonoBehaviour
        
         PickUpToPlayerTorch(collision);
         CheckPositionOnTaken(ref Collider);
-        //NewPositionTorchIfOnTaken(Collider, _randomNumber);
-        //DestroyTorch(collision);
-
-
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -58,8 +54,9 @@ public class Torch : MonoBehaviour
 
     private void PickUpToPlayerTorch(Collider2D coll)
     {
-        if (coll.gameObject.CompareTag("Player") && _isPlayer && _activeTorch)
+        if (coll.gameObject.CompareTag("Player") && _activeTorch)
         {
+            _playerPickUpTorch = true;
             gameObject.GetComponent<CircleCollider2D>().radius = 4;
             gameObject.transform.position = new Vector2(Player.transform.position.x - 0.5f, Player.transform.position.y + 0.5f);
             StartCoroutine(DisableTorch());
@@ -69,7 +66,8 @@ public class Torch : MonoBehaviour
     IEnumerator DisableTorch()
     {
         _activeTorch = true;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
+        _playerPickUpTorch = false;
         _activeTorch = false;
         Destroy(gameObject);
     }
@@ -78,7 +76,6 @@ public class Torch : MonoBehaviour
     {
         RandomNumberForSpawn = Random.Range(0, PointSpawn.Length);
         gameObject.transform.position = PointSpawn[RandomNumberForSpawn].transform.position;
-        Debug.Log(RandomNumberForSpawn + "gf");
     }
 
     private void CheckPositionOnTaken(ref Collider2D []collider2D)
@@ -94,10 +91,4 @@ public class Torch : MonoBehaviour
             gameObject.transform.position = PointSpawn[RandomNumber].transform.position;
         }
     }
-
-    //private void DestroyTorch(Collider2D collider)
-    //{
-    //    if(collider.CompareTag("Torch"))
-    //       collider.gameObject.GetComponent<Collider2D>().enabled = false;
-    //}
 }
