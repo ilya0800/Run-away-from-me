@@ -5,23 +5,30 @@ using UnityEngine;
 public class Trap : MonoBehaviour, IRandomCoordinates
 {
     [SerializeField]
-    Animator _animatorEnemy;
+    private Animator _animatorEnemy;
+    [SerializeField]
+    private LayerMask _layerMask;
     private Animator _animator;
     private float _posX;
     private float _posY;
     private AudioSource _audioSource;
     private bool _isTrap;
+    private float _sizeCubeX = 4;
+    private float _sizeCubeY = 4;
+    private float _sizeCubeZ = 4;
     public bool IsTrapped
     {
         get { return _isTrap; }
         set { _isTrap = value; }
     }
 
-    void Start()
+    private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
+        RandomCoordinates(ref _posX,ref _posY);
         SpawnTrap();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -79,7 +86,18 @@ public class Trap : MonoBehaviour, IRandomCoordinates
 
     private void SpawnTrap()
     {
-        RandomCoordinates(ref _posX, ref _posY);
-        gameObject.transform.position = new Vector2(_posX, _posY);
+        if (!CheckSpawnTrapOnPlayer())
+            gameObject.transform.position = new Vector2(_posX, _posY);
+        else if (CheckSpawnTrapOnPlayer())
+        {
+            RandomCoordinates(ref _posX, ref _posY);
+            gameObject.transform.position = new Vector2(_posX, _posY);
+        }
+    }
+
+    private bool CheckSpawnTrapOnPlayer()
+    {
+        Collider2D collider2D = Physics2D.OverlapBox(gameObject.transform.position, new Vector3(_sizeCubeX, _sizeCubeY,_sizeCubeZ), 0, _layerMask);
+        return collider2D;
     }
 }

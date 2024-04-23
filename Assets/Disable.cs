@@ -9,10 +9,10 @@ public class Disable : MonoBehaviour
     [SerializeField]
     GameObject _darkness;
     [SerializeField]
-    PlayerRay _playerRay;
-    private bool _oneUse = true;
+    private OverLapDarkness _overlapDarkness;
 
-    void Update()
+    private bool _oneUse = true;
+    private void Update()
     {
         ActivePotion();
     }
@@ -24,19 +24,13 @@ public class Disable : MonoBehaviour
     }
 
     IEnumerator PotionSearchActive()
-    {
+    { 
         _oneUse = false;
         _darkness.SetActive(false);
         yield return new WaitForSeconds(3);
         _darkness.SetActive(true);
-        yield return new WaitForSeconds(3);
-        _playerRay.distanceHitDown = 0.5f;
-        _playerRay.distanceHitUp = 0.5f;
-        _playerRay.distanceHitRight = 0.5f;
-        yield return new WaitForSeconds(3);
-        _playerRay.distanceHitRight = 1.5f;
-        _playerRay.distanceHitUp = 1.5f;
-        _playerRay.distanceHitDown = 1.3f;
-        StopAllCoroutines();
+        _overlapDarkness.enabled =false;
+         yield return new WaitForSeconds(5);
+        _overlapDarkness.enabled = true;
     }
 }

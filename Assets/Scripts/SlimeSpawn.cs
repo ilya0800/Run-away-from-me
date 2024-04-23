@@ -25,7 +25,7 @@ public class SlimeSpawn : MonoBehaviour, IRandomCoordinates
 
     public void RandomCoordinates(ref float x, ref float y)
     {
-        x = Random.Range(-10, 16);
-        y = Random.Range(12, -6.90f);
+        x = Random.Range(-11, 16);
+        y = Random.Range(11, -6.80f);
     }
 }

@@ -24,7 +24,6 @@ public class Darkness : MonoBehaviour
             animator.SetBool("Active", true);
     }
 
-
     IEnumerator VisibleDarknessFalse()
     {
         if (animator.GetBool("Active"))

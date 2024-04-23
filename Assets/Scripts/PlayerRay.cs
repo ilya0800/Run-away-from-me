@@ -14,34 +14,28 @@ public class PlayerRay : MonoBehaviour
     public float distanceHitUp = 1.5f;
     public float distanceHitDown = 1.3f;
     public float distanceHitRight = 1.5f;
-    private float time = 0;
 
     void Update()
     {
         HitFog(hit, _hitUp, _hitDown);
-       // Debug.DrawRay(gameObject.transform.position, hit[])
-    }
-    private float Timer()
-    {
-        time += Time.deltaTime;
-        return time;
     }
 
-    private void HitFog(RaycastHit2D[]hit2Ds, RaycastHit2D[] hitUp, RaycastHit2D[] hitDown)
+    private void HitFog(RaycastHit2D[] hit2Ds, RaycastHit2D[] hitUp, RaycastHit2D[] hitDown)
     {
         hitUp = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up, distanceHitUp, mask);
         hit2Ds = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.right, distanceHitRight, mask);
-        hitDown = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up * -1, distanceHitDown, mask);
+        hitDown = Physics2D.RaycastAll(gameObject.transform.position, gameObject.transform.up * 1, distanceHitDown, mask);
         
         for (int i = 0; i < hit2Ds.Length; i++) {
             if (hit2Ds[i].collider != null)
             {
                 hit2Ds[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", true);
-                Timer();
-                if (Timer() > 5)
-                {
-                    hit2Ds[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", false);
-                }
+                StartCoroutine(OnDarknessRightRay());
+            }
+            IEnumerator OnDarknessRightRay()
+            {
+                yield return new WaitForSeconds(5);
+                hit2Ds[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", false);
             }
         }
 
@@ -50,24 +44,30 @@ public class PlayerRay : MonoBehaviour
             if (hitUp[j].collider != null)
             {
                 hitUp[j].collider.gameObject.GetComponent<Animator>().SetBool("Active", true);
-                if (Timer() > 5)
-                {
-                    hit2Ds[j].collider.gameObject.GetComponent<Animator>().SetBool("Active", false);
-                }
+                StartCoroutine(OnDarknessUpRay());
+            }
+            IEnumerator OnDarknessUpRay()
+            {
+                yield return new WaitForSeconds(5);
+                Debug.Log("rabotaet");
+                hitUp[j].collider.gameObject.GetComponent<Animator>().SetBool("Active", false);
             }
         }
 
-        for(int i = 0; i < hitDown.Length; i++)
+        for (int i = 0; i < hitDown.Length; i++)
         {
             if (hitDown[i].collider != null)
             {
                 hitDown[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", true);
-                if (Timer() > 5)
-                {
-                    hit2Ds[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", false);
-                }
-
+                OnDarknessDownRay();
+            }
+            IEnumerator OnDarknessDownRay()
+            {
+                yield return new WaitForSeconds(5);
+                hitDown[i].collider.gameObject.GetComponent<Animator>().SetBool("Active", false);
             }
         }
     }
+
+  
 }

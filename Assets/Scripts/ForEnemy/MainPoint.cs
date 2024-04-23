@@ -6,11 +6,11 @@ public class MainPoint : MonoBehaviour
 {
 
     [SerializeField]
-    Transform _mainPoint;
+    private Transform _mainPoint;
     [SerializeField]
-    GameObject _cross;
+    private GameObject _cross;
     [SerializeField]
-    CrossActive _crossActive;
+    private CrossActive _crossActive;
 
 
     void Update()

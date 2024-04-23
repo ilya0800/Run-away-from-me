@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField]
-    GameObject _childAttack;
+    private GameObject _childAttack;
     private AudioSource _attackSound;
     
 

@@ -5,11 +5,16 @@ using UnityEngine;
 public class Fire : MonoBehaviour, IRandomCoordinates
 {
     [SerializeField] 
-    GameObject PlayerOnFire;
+    private GameObject _PlayerOnFire;
+    [SerializeField]
+    private LayerMask _layerMask;
     private Animator animator;
     private float PosX, PosY;
+    private float _sizeX = 4;
+    private float _sizeY = 4;
+    private float _sizeZ = -3;
 
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>(); 
         RandomCoordinates(ref PosX, ref PosY);
@@ -22,7 +27,7 @@ public class Fire : MonoBehaviour, IRandomCoordinates
             animator.SetBool("Collision", true);    
 
         if(collision.gameObject.CompareTag("Player"))
-            PlayerOnFire.SetActive(true);
+            _PlayerOnFire.SetActive(true);
     }
 
     public void RandomCoordinates(ref float PosX, ref float PosY)
@@ -33,11 +38,26 @@ public class Fire : MonoBehaviour, IRandomCoordinates
 
     private void SpawnFire()
     {
-        gameObject.transform.position = new Vector3(PosX, PosY, -2);
+        if (!CheckStartSpawnOnPlayer())
+        {
+            gameObject.transform.position = new Vector3(PosX, PosY, -2);
+            Debug.Log("dont reSpawn");
+        }
+        else if (CheckStartSpawnOnPlayer())
+        {
+            RandomCoordinates(ref PosX, ref PosY);
+            gameObject.transform.position = new Vector3(PosX, PosY, -2);
+        }
     }
 
     public void DestroyObj()
     {
         Destroy(gameObject);
+    }
+
+    private bool CheckStartSpawnOnPlayer()
+    {
+        Collider2D collider2D = Physics2D.OverlapBox(gameObject.transform.position, new Vector3(_sizeX, _sizeY, _sizeZ), 0, _layerMask);
+        return collider2D;
     }
 }
