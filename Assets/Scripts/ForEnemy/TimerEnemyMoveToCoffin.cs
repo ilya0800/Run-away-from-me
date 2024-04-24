@@ -7,13 +7,13 @@ public class TimerEnemyMoveToCoffin : MonoBehaviour
     private float _timePermissionMove = 8;
     public static bool StartStop = true;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         StopEnemy();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         StopEnemy();
         MinusTime();

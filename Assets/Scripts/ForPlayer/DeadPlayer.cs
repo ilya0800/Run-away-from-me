@@ -9,7 +9,7 @@ public class DeadPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if (ImmortalityAtStart())
+        if (!ImmortalityAtStart())
         {
             if (collider2D.gameObject.CompareTag("HitEnemy"))
                 _panelDeadth.SetActive(true);

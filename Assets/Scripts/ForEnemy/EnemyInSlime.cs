@@ -23,12 +23,12 @@ public class EnemyInSlime : MonoBehaviour
         Slime += EnemyGoSlime;
     }
 
-    public void Update()
+    private void Update()
     {
         EnemyGoSlime();
     }
 
-    public IEnumerator NextSlimeGo()
+    private IEnumerator NextSlimeGo()
     {
         InSlime = true;
         yield return new WaitForSeconds(3);
@@ -39,11 +39,11 @@ public class EnemyInSlime : MonoBehaviour
 
     }
 
-    public void EnemyGoSlime()
+    private void EnemyGoSlime()
     {
         for (int i = 0; i < _slimeScript.Length; i++)
         {
-            if (_slimeScript[i].PlayerOnSlime && !_trap.IsTrapped)
+            if (_slimeScript[i].PlayerOnSlime && !_trap.IsTrapped && !TimerEnemyMoveToCoffin.StartStop)
             {
                 gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, _slimeScript[i].transform.position, 2f * Time.deltaTime);
                 StartCoroutine(NextSlimeGo());

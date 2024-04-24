@@ -408,6 +408,7 @@ GameObject:
   - component: {fileID: 1470781667}
   - component: {fileID: 1470781666}
   - component: {fileID: 1470781669}
+  - component: {fileID: 1470781670}
   - component: {fileID: 1470781668}
   m_Layer: 5
   m_Name: Start
@@ -541,6 +542,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1470781670}
+        m_TargetAssemblyTypeName: Restart, Assembly-CSharp
+        m_MethodName: RestartStatic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1470781670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470781664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a291969fb11343544875317997d75579, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1519170571
 GameObject:
   m_ObjectHideFlags: 0

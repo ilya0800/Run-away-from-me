@@ -15,7 +15,7 @@ public class SlimeOnPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Slime"))
         {
             _controllerPlayer.ActionPlayer.Invoke(ref _onMove);
-            _controllerPlayer.Speed = 0.5f;
+            _controllerPlayer.Speed = 1f;
             for (int i = 0; i < _audioSource.Length; i++)
             {
                 if (!_audioSource[i].isPlaying)
@@ -31,7 +31,7 @@ public class SlimeOnPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Slime"))
         {
             _controllerPlayer.ActionPlayer.Invoke(ref _onMove);
-            _controllerPlayer.Speed = 0.5f;
+            _controllerPlayer.Speed = 1f;
             for (int i = 0; i < _audioSource.Length; i++)
             {
                 if (!_audioSource[i].isPlaying)

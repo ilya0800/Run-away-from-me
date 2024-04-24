@@ -87,10 +87,10 @@ public class ControllerEnemy : MonoBehaviour
 
     private void RotationEnemy()
     {
-        if (gameObject.transform.position.x > Player.transform.position.x && DistanceBetweenEnemyAndPlayer() < 4)
+        if (gameObject.transform.position.x > Player.transform.position.x && DistanceBetweenEnemyAndPlayer() < 6)
             gameObject.transform.rotation = Quaternion.Euler(0, -180, -2);
 
-        else if (gameObject.transform.position.x < Player.transform.position.x && DistanceBetweenEnemyAndPlayer() < 4)
+        else if (gameObject.transform.position.x < Player.transform.position.x && DistanceBetweenEnemyAndPlayer() < 6)
             gameObject.transform.rotation = Quaternion.Euler(0, 0, -2);
     }
 
