@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class ControllerPlayer : MonoBehaviour
 {
+    [SerializeField]
+    AudioSource _run;
     private float _speed = 2;
     private Rigidbody2D _rigidbody2D;
     private float _posX;
@@ -71,14 +73,16 @@ public class ControllerPlayer : MonoBehaviour
     {
         if (Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0 || Input.GetAxis("Vertical") > 0  || Input.GetAxis("Vertical") < 0)
         {
+            PlaySoundRun();
             _posX = Input.GetAxis("Horizontal") * _speed;
             _posY = Input.GetAxis("Vertical") * _speed;
             _rigidbody2D.velocity = new Vector3(_posX, _posY, 0);
             animator.SetBool("Active", true);
-            OnMove = true;
+            OnMove = true;   
         }
         else
         {
+            StopSoundRun();
             animator.SetBool("Active", false);
             OnMove = false;
         }
@@ -111,5 +115,17 @@ public class ControllerPlayer : MonoBehaviour
         yield return new WaitForSeconds(5);
         _speed = 2f;
         StopAllCoroutines();
+    }
+
+    private void PlaySoundRun()
+    {
+        if(!_run.isPlaying)
+        _run.Play();
+    }
+
+    private void StopSoundRun()
+    {
+        if(_run.isPlaying)
+        _run.Stop();
     }
 }

@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public partial class Potion : MonoBehaviour
+public partial class Potion : MonoBehaviour, ITextForItem
 {
     [SerializeField]
-    GameObject Darkness;
+    private GameObject Darkness;
     [SerializeField]
-    Slot _slot;
+    private Slot _slot;
     [SerializeField]
-    GameObject SlotPotion;
+    private GameObject SlotPotion;
+    [SerializeField]
+    private GameObject _textPickUp;
+    [SerializeField]
+    private GameObject _textReplace;
     public static bool PickUpVisibility = false;
 
 
@@ -18,9 +22,15 @@ public partial class Potion : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-             PotionPickUp();
-             ReplaceItemPotion();
+            //ShowText();
+            PotionPickUp();
+            ReplaceItemPotion();
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        HideText();
     }
 
     private void PotionPickUp()
@@ -41,5 +51,25 @@ public partial class Potion : MonoBehaviour
             SlotPotion.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
+    }
+
+    public void ShowText()
+    {
+        if (Slot._checkSlot)
+        {
+            _textPickUp.SetActive(true);
+            _textReplace.SetActive(false);
+        }
+        else if (!Slot._checkSlot)
+        {
+            _textPickUp.SetActive(false);
+            _textReplace.SetActive(true);
+        }
+    }
+
+    public void HideText()
+    {
+        _textPickUp.SetActive(false);
+        _textReplace.SetActive(false);
     }
 }

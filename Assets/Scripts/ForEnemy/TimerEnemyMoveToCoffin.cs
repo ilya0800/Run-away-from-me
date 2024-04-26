@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TimerEnemyMoveToCoffin : MonoBehaviour
 {
-    private float _timePermissionMove = 8;
+    private float _timePermissionMove = 5;
     public static bool StartStop = true;
+    private bool _startTime = false;
     // Start is called before the first frame update
     private void Start()
     {
@@ -19,8 +20,8 @@ public class TimerEnemyMoveToCoffin : MonoBehaviour
         MinusTime();
     }
 
-    private void StopEnemy() 
-    {
+    private void StopEnemy()
+    {      
         gameObject.GetComponent<Collider2D>().isTrigger = true;
         StartStop = true;
         gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
@@ -31,11 +32,14 @@ public class TimerEnemyMoveToCoffin : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 
         }
-
+        
     }
 
     private void MinusTime()
     {
+        if(Input.anyKey)
+            _startTime = true;
+        if(_startTime)
         _timePermissionMove -= Time.deltaTime;
     }
 

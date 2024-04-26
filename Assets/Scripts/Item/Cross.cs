@@ -4,15 +4,19 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cross : MonoBehaviour
+public class Cross : MonoBehaviour, ITextForItem
 {
     // Start is called before the first frame update
     [SerializeField]
-    GameObject _box;
+    private GameObject _box;
     [SerializeField]
-    Slot _slot;
+    private Slot _slot;
     [SerializeField]
-    GameObject SlotCross;
+    private GameObject SlotCross;
+    [SerializeField]
+    private GameObject _textPickUp;
+    [SerializeField]
+    private GameObject _textReplace;
     public static bool CrossPickUp = false;
 
     // Update is called once per frame
@@ -25,9 +29,15 @@ public class Cross : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            ShowText();
             PotionPickUp();
             ReplaceItemPotion();
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        HideText();    
     }
 
     private void PotionPickUp()
@@ -61,5 +71,23 @@ public class Cross : MonoBehaviour
         gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, _box.transform.position, 1);
     }
 
-    
+    public void ShowText()
+    {
+        if (Slot._checkSlot)
+        {
+            _textReplace.gameObject.SetActive(false);
+            _textPickUp.gameObject.SetActive(true);
+        }
+        else if (!Slot._checkSlot)
+        {
+            _textPickUp.gameObject.SetActive(false);
+            _textReplace.gameObject.SetActive(true);
+        }
+    }
+
+    public void HideText()
+    {
+        _textPickUp.gameObject.SetActive(false);
+        _textReplace.gameObject.SetActive(false);
+    }
 }

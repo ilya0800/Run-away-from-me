@@ -10,8 +10,8 @@ public class TimerWave : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Image[] image;
     [SerializeField] CoffinController controller;
-    private float _time = 0f;
-    private int _count = 7;
+    private int _count = 5;
+    private bool _startCoroutine = false;
 
     void Start()
     {
@@ -26,17 +26,18 @@ public class TimerWave : MonoBehaviour
 
     private void MinusTimer()
     {
-        _time += Time.deltaTime;
-        StartCoroutine(CountOnEight());
+        if (Input.anyKeyDown)
+            _startCoroutine = true;
+        if(_startCoroutine)
+        StartCoroutine(CountOnFight());
     }
     
-    IEnumerator CountOnEight()
+    IEnumerator CountOnFight()
     {
         image[_count].GetComponent<Image>().enabled = true;
         yield return new WaitForSeconds(1);
         image[_count].GetComponent<Image>().enabled = false;
         _count--;
-        _time = 0;
         if (_count == 0)
         {
             CoffinController.OpenCoffin();

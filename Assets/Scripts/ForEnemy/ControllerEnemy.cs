@@ -104,7 +104,7 @@ public class ControllerEnemy : MonoBehaviour
     {
         _enemyGoToDoor = true;
         gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, Player.transform.position, _speed * Time.deltaTime);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         _enemyGoToDoor = false;
         OpeningTheDoor.ActiveOpenDoor = false;
     }
