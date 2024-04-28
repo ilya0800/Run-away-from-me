@@ -38,10 +38,6 @@ public class TimerWave : MonoBehaviour
         yield return new WaitForSeconds(1);
         image[_count].GetComponent<Image>().enabled = false;
         _count--;
-        if (_count == 0)
-        {
-            CoffinController.OpenCoffin();
-        }
         StopAllCoroutines();      
     }
 

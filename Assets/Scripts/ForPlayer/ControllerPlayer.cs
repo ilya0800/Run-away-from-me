@@ -9,7 +9,7 @@ public class ControllerPlayer : MonoBehaviour
 {
     [SerializeField]
     AudioSource _run;
-    private float _speed = 2;
+    private float _speed = 3;
     private Rigidbody2D _rigidbody2D;
     private float _posX;
     private float _posY;
@@ -113,7 +113,7 @@ public class ControllerPlayer : MonoBehaviour
         yield return new WaitForSeconds(3);
         _speed = 1f;
         yield return new WaitForSeconds(5);
-        _speed = 2f;
+        _speed = 3f;
         StopAllCoroutines();
     }
 

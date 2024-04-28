@@ -15,21 +15,27 @@ public partial class Potion : MonoBehaviour, ITextForItem
     private GameObject _textPickUp;
     [SerializeField]
     private GameObject _textReplace;
+    private bool _inTrigger = false;
     public static bool PickUpVisibility = false;
 
+    private void Update()
+    {
+        ReplaceItemPotion();
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //ShowText();
+            _inTrigger = true;
+            ShowText();
             PotionPickUp();
-            ReplaceItemPotion();
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        _inTrigger = false;
         HideText();
     }
 
@@ -45,7 +51,7 @@ public partial class Potion : MonoBehaviour, ITextForItem
 
     private void ReplaceItemPotion()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !Slot._checkSlot)
+        if (Input.GetKeyDown(KeyCode.E) && !Slot._checkSlot && _inTrigger)
         {
             _slot.ReplaceItem();
             SlotPotion.gameObject.SetActive(true);

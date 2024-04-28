@@ -6,25 +6,25 @@ using UnityEngine;
 public class Torch : MonoBehaviour
 {
     [SerializeField]
-    GameObject Player;
+    private GameObject Player;
     [SerializeField]
-    GameObject[] PointSpawn;
+    private GameObject[] PointSpawn;
     [SerializeField]
-    LayerMask LayerMask;
+    private LayerMask LayerMask;
  
+  
     private bool _playerPickUpTorch = false;
+    private bool _activeTorch = true;
+    private int _randomNumber; 
     public bool PlayerPickUpTorch
     {
         set { _playerPickUpTorch = value; }
-        get { return _playerPickUpTorch; }      
+        get { return _playerPickUpTorch; }
     }
-    private bool _activeTorch = true;
-    private int _randomNumber; 
-    Collider2D []Collider;
-
 
     private void Start()
     {
+        CheckPositionOnTaken();
         StartSpawnTorch(ref _randomNumber);
     }
 
@@ -34,7 +34,7 @@ public class Torch : MonoBehaviour
             collision.gameObject.GetComponent<Animator>().SetBool("Active", true);
        
         PickUpToPlayerTorch(collision);
-        CheckPositionOnTaken(ref Collider);
+        CheckPositionOnTaken();
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -42,7 +42,7 @@ public class Torch : MonoBehaviour
         if (collision.gameObject.CompareTag("Fog"))
             collision.gameObject.GetComponent<Animator>().SetBool("Active", true);
 
-        CheckPositionOnTaken(ref Collider);
+        CheckPositionOnTaken();
         PickUpToPlayerTorch(collision);
     }
 
@@ -74,21 +74,21 @@ public class Torch : MonoBehaviour
 
     private void StartSpawnTorch(ref int RandomNumberForSpawn)
     {
-        RandomNumberForSpawn = Random.Range(0, PointSpawn.Length);
-        gameObject.transform.position = PointSpawn[RandomNumberForSpawn].transform.position;
+        if (CheckPositionOnTaken())
+        {
+            RandomNumberForSpawn = Random.Range(0, PointSpawn.Length);
+            gameObject.transform.position = PointSpawn[RandomNumberForSpawn].transform.position;
+        }
+        else if (!CheckPositionOnTaken())
+        {
+            RandomNumberForSpawn = Random.Range(0, PointSpawn.Length);
+            gameObject.transform.position = PointSpawn[RandomNumberForSpawn].transform.position;
+        }
     }
 
-    private void CheckPositionOnTaken(ref Collider2D []collider2D)
+    private bool CheckPositionOnTaken()
     {
-        collider2D = Physics2D.OverlapCircleAll(gameObject.transform.position, 2f, LayerMask);
-    }
-    
-    private void NewPositionTorchIfOnTaken(Collider2D[] collider2s, int RandomNumber)
-    {
-        if(collider2s.Length > 1)
-        {
-            RandomNumber = Random.Range(0, PointSpawn.Length);
-            gameObject.transform.position = PointSpawn[RandomNumber].transform.position;
-        }
+        Collider2D collider2D = Physics2D.OverlapCircle(gameObject.transform.position, 2f, LayerMask);
+        return collider2D;
     }
 }

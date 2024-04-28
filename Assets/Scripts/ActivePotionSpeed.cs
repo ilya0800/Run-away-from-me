@@ -18,7 +18,7 @@ public class ActivePotionSpeed : MonoBehaviour
 
     public bool ActivePotionSpeedKey()
     {
-        if (Input.GetKeyDown(KeyCode.H) && gameObject.activeSelf)
+        if (Input.GetKey(KeyCode.F) && gameObject.activeSelf)
         {
             ActiveSpeed = true;
             return ActiveSpeed;

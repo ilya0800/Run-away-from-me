@@ -13,25 +13,32 @@ public class PotionSpeed : MonoBehaviour, ITextForItem
     [SerializeField]
     GameObject SlotPotion;
     public static bool PickUpSpeed = false;
+    private bool _inTrigger = false;
+
+    private void Update()
+    {
+        ReplaceItemPotion();    
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            _inTrigger = true;
             ShowText();
             PotionPickUp();
-            ReplaceItemPotion(); 
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        _inTrigger = false;
         HideText();    
     }
 
     private void PotionPickUp()
     {
-        if (Input.GetKeyDown(KeyCode.E) && Slot._checkSlot)
+        if (Input.GetKey(KeyCode.E) && Slot._checkSlot)
         {
             PickUpSpeed = true;
             _slot.PickUpItem();
@@ -41,7 +48,7 @@ public class PotionSpeed : MonoBehaviour, ITextForItem
 
     private void ReplaceItemPotion()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !Slot._checkSlot)
+        if (Input.GetKeyDown(KeyCode.E) && !Slot._checkSlot && _inTrigger)
         {
             _slot.ReplaceItem();
             SlotPotion.gameObject.SetActive(true);

@@ -18,11 +18,6 @@ public class Slot : MonoBehaviour
     public List<GameObject> _itemImage;
     public List<GameObject> _item;
 
-    [SerializeField]
-    GameObject _textOccupiedItem;
-    
-    [SerializeField]
-    GameObject _textFreeSlot;
 
     [SerializeField]
     Transform _PosPlaeyer;

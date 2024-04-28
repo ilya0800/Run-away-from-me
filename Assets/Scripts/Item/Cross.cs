@@ -17,12 +17,14 @@ public class Cross : MonoBehaviour, ITextForItem
     private GameObject _textPickUp;
     [SerializeField]
     private GameObject _textReplace;
+    private bool _inTrigger = false;
     public static bool CrossPickUp = false;
 
     // Update is called once per frame
     void Update()
     {
         MoveToBox();
+        ReplaceItemPotion();
     } 
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -31,13 +33,14 @@ public class Cross : MonoBehaviour, ITextForItem
         {
             ShowText();
             PotionPickUp();
-            ReplaceItemPotion();
+            _inTrigger = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         HideText();    
+        _inTrigger = false;
     }
 
     private void PotionPickUp()
@@ -55,7 +58,7 @@ public class Cross : MonoBehaviour, ITextForItem
 
     private void ReplaceItemPotion()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !Slot._checkSlot)
+        if (Input.GetKeyDown(KeyCode.E) && !Slot._checkSlot && _inTrigger)
         {
 
             _slot.ReplaceItem();

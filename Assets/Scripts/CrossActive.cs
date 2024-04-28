@@ -18,7 +18,7 @@ public class CrossActive : MonoBehaviour
 
     public bool ActiveCross()
     {
-        if (Input.GetKeyDown(KeyCode.G) && gameObject.activeSelf)
+        if (Input.GetKey(KeyCode.F) && gameObject.activeSelf)
         {
             crossActive = true;
             return crossActive;

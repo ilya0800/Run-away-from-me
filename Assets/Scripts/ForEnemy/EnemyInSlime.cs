@@ -43,7 +43,7 @@ public class EnemyInSlime : MonoBehaviour
     {
         for (int i = 0; i < _slimeScript.Length; i++)
         {
-            if (_slimeScript[i].PlayerOnSlime && !_trap.IsTrapped && !TimerEnemyMoveToCoffin.StartStop)
+            if (_slimeScript[i].PlayerOnSlime && !_trap.IsTrapped && !TimerEnemyMoveToCoffin.StartStop && !CrossActive.crossActive)
             {
                 gameObject.transform.position = Vector2.MoveTowards(gameObject.transform.position, _slimeScript[i].transform.position, 2f * Time.deltaTime);
                 StartCoroutine(NextSlimeGo());

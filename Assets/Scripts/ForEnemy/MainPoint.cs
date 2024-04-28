@@ -33,10 +33,8 @@ public class MainPoint : MonoBehaviour
         if (gameObject.transform.position == _mainPoint.transform.position)
         {
             OnActiveEnemyScripts();
-            CoffinController.CloseCoffin();
             yield return new WaitForSeconds(5);
             OpeningTheDoor.CrossActive = false;
-            CoffinController.OpenCoffin();
             gameObject.GetComponent<MainPoint>().enabled = false;
         }
     }
